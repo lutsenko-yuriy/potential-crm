@@ -1,6 +1,6 @@
 package com.iurii.demo.rest
 
-class StudentErrorResponse(
+class EmployeeErrorResponse(
     var status: Int? = null,
     var message: String? = null,
     var timestamp: Long? = null

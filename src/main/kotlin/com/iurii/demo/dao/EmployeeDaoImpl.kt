@@ -11,7 +11,7 @@ class EmployeeDaoImpl(val entityManager: EntityManager) : EmployeeDao {
         return entityManager.createQuery("FROM Employee", Employee::class.java).resultList
     }
 
-    override fun findById(id: Long): Employee {
+    override fun findById(id: Long): Employee? {
         return entityManager.find(Employee::class.java, id)
     }
 

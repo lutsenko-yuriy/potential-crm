@@ -12,7 +12,7 @@ class EmployeeServiceImpl(private val employeeDao: EmployeeDao) : EmployeeServic
         return employeeDao.findAll()
     }
 
-    override fun findById(id: Long): Employee {
+    override fun findById(id: Long): Employee? {
         return employeeDao.findById(id)
     }
 

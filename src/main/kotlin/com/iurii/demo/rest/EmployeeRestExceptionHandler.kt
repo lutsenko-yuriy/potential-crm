@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 
 @ControllerAdvice
-class StudentRestExceptionHandler {
+class EmployeeRestExceptionHandler {
     @ExceptionHandler
-    fun handleException(ex: StudentNotFoundException): ResponseEntity<StudentErrorResponse> {
+    fun handleException(ex: EmployeeNotFoundException): ResponseEntity<EmployeeErrorResponse> {
         val errorResponse =
-            StudentErrorResponse(
+            EmployeeErrorResponse(
                 status = HttpStatus.NOT_FOUND.value(),
                 message = ex.message,
                 timestamp = System.currentTimeMillis()
@@ -20,9 +20,9 @@ class StudentRestExceptionHandler {
     }
 
     @ExceptionHandler
-    fun handleException(ex: Exception): ResponseEntity<StudentErrorResponse> {
+    fun handleException(ex: Exception): ResponseEntity<EmployeeErrorResponse> {
         val errorResponse =
-            StudentErrorResponse(
+            EmployeeErrorResponse(
                 status = HttpStatus.BAD_REQUEST.value(),
                 message = ex.message,
                 timestamp = System.currentTimeMillis()
