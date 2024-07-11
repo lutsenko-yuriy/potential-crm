@@ -23,5 +23,9 @@ class EmployeeRestController(val employeeService: EmployeeService) {
         return employeeService.save(employee)
     }
 
+    @PutMapping("/employees")
+    fun updateEmployee(@RequestBody employee: Employee): Employee {
+        return employeeService.save(employee)
+    }
 
 }
