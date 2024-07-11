@@ -37,10 +37,26 @@ class StudentRestController {
     }
 
     @ExceptionHandler
-    fun handleException(ex: Exception): ResponseEntity<StudentErrorResponse> {
+    fun handleException(ex: StudentNotFoundException): ResponseEntity<StudentErrorResponse> {
         val errorResponse =
-            StudentErrorResponse(status = 404, message = ex.message, timestamp = System.currentTimeMillis())
+            StudentErrorResponse(
+                status = HttpStatus.NOT_FOUND.value(),
+                message = ex.message,
+                timestamp = System.currentTimeMillis()
+            )
 
         return ResponseEntity(errorResponse, HttpStatus.NOT_FOUND)
+    }
+
+    @ExceptionHandler
+    fun handleException(ex: Exception): ResponseEntity<StudentErrorResponse> {
+        val errorResponse =
+            StudentErrorResponse(
+                status = HttpStatus.BAD_REQUEST.value(),
+                message = ex.message,
+                timestamp = System.currentTimeMillis()
+            )
+
+        return ResponseEntity(errorResponse, HttpStatus.BAD_REQUEST)
     }
 }
