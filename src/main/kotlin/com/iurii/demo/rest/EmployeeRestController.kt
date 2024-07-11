@@ -28,4 +28,11 @@ class EmployeeRestController(val employeeService: EmployeeService) {
         return employeeService.save(employee)
     }
 
+    @DeleteMapping("/employees/{id}")
+    fun deleteEmployee(@PathVariable id: Long) {
+        employeeService.findById(id)
+            ?: throw EmployeeNotFoundException("Employee with id=$id not found. No one to remove.")
+        employeeService.deleteById(id)
+    }
+
 }
