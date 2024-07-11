@@ -1,7 +1,6 @@
 package com.iurii.demo.entity
 
 import jakarta.persistence.*
-import org.springframework.data.annotation.Id
 
 @Entity
 @Table(name = "employee")
@@ -20,5 +19,4 @@ class Employee(
     override fun toString(): String {
         return "Employee(firstName='$firstName', lastName='$lastName', email='$email', id=$id)"
     }
-
 }
