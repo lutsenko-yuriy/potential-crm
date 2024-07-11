@@ -2,9 +2,10 @@ package com.iurii.demo.rest
 
 import com.iurii.demo.entity.Student
 import jakarta.annotation.PostConstruct
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api")
@@ -36,27 +37,4 @@ class StudentRestController {
         return students[id]
     }
 
-    @ExceptionHandler
-    fun handleException(ex: StudentNotFoundException): ResponseEntity<StudentErrorResponse> {
-        val errorResponse =
-            StudentErrorResponse(
-                status = HttpStatus.NOT_FOUND.value(),
-                message = ex.message,
-                timestamp = System.currentTimeMillis()
-            )
-
-        return ResponseEntity(errorResponse, HttpStatus.NOT_FOUND)
-    }
-
-    @ExceptionHandler
-    fun handleException(ex: Exception): ResponseEntity<StudentErrorResponse> {
-        val errorResponse =
-            StudentErrorResponse(
-                status = HttpStatus.BAD_REQUEST.value(),
-                message = ex.message,
-                timestamp = System.currentTimeMillis()
-            )
-
-        return ResponseEntity(errorResponse, HttpStatus.BAD_REQUEST)
-    }
 }
