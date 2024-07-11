@@ -3,6 +3,7 @@ package com.iurii.demo.rest
 import com.iurii.demo.entity.Student
 import jakarta.annotation.PostConstruct
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -26,17 +27,20 @@ class StudentRestController {
     }
 
     @GetMapping("/students")
-    fun students(): ResponseEntity<List<Student>> {
-        return ResponseEntity.ok(students)
+    fun students(): List<Student> {
+        return students
     }
 
     @GetMapping("/students/{id}")
-    fun student(@PathVariable id: Int): ResponseEntity<Student> {
-        return if (id in students.indices) {
-            ResponseEntity.ok(students[id])
-        } else {
-            ResponseEntity.notFound().build()
+    fun student(@PathVariable id: Int): Student {
+        if (id !in students.indices) {
+            throw StudentNotFoundException("Student with id $id not found")
         }
+        return students[id]
     }
 
+    @ExceptionHandler
+    fun handleException(ex: Exception): ResponseEntity<StudentErrorResponse> {
+
+    }
 }
