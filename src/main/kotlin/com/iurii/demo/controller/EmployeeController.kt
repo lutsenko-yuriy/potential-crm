@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 
 @Controller
 @RequestMapping("/employees")
@@ -23,6 +24,13 @@ class EmployeeController(val employeeService: EmployeeService) {
     @GetMapping("/add")
     fun addEmployee(model: Model): String {
         val employee = Employee()
+        model.addAttribute("employee", employee)
+        return "employees/add"
+    }
+
+    @GetMapping("/update")
+    fun updateEmployee(@RequestParam("id") employeeId: Long, model: Model): String {
+        val employee = employeeService.findById(employeeId)
         model.addAttribute("employee", employee)
         return "employees/add"
     }
