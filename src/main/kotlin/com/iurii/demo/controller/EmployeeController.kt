@@ -35,6 +35,12 @@ class EmployeeController(val employeeService: EmployeeService) {
         return "employees/add"
     }
 
+    @GetMapping("/delete")
+    fun deleteEmployee(@RequestParam("id") employeeId: Long): String {
+        employeeService.deleteById(employeeId)
+        return "redirect:/employees/list"
+    }
+
     @PostMapping("/save")
     fun saveEmployee(@ModelAttribute("employee") employee: Employee): String {
         employeeService.save(employee)
