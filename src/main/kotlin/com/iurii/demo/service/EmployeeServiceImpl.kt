@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional
 class EmployeeServiceImpl(private val employeeRepository: EmployeeRepository) : EmployeeService {
 
     override fun findAll(): List<Employee> {
-        return employeeRepository.findAll()
+        return employeeRepository.findAllByOrderByLastNameAsc()
     }
 
     override fun findById(id: Long): Employee? {
