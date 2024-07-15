@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface EmployeeRepository: JpaRepository<Employee, Long> {
-    fun findAllByOrderByLastNameAsc(): List<Employee>
+    fun findAllByOrderByLastNameAscFirstNameAsc(): List<Employee>
 }
