@@ -1,6 +1,8 @@
 package com.iurii.demo.aspect
 
+import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.annotation.Aspect
+import org.aspectj.lang.annotation.Before
 import org.aspectj.lang.annotation.Pointcut
 import org.springframework.stereotype.Component
 import java.util.logging.Logger
@@ -23,4 +25,9 @@ class LoggingAspect {
     @Pointcut("forControllers() || forServices() || forDAOs()")
     fun forNecessaryMethods() {}
 
+    @Before("forNecessaryMethods()")
+    fun before(joinPoint: JoinPoint) {
+        logger.info("=======> Before running the method ${joinPoint.signature.toShortString()}")
+        logger.info("=======> With arguments: ${joinPoint.args.contentToString()}")
+    }
 }
